@@ -13,6 +13,7 @@ import (
 // https://medium.com/swlh/cool-stuff-with-gos-ast-package-pt-1-981460cddcd7
 // https://medium.com/swlh/cool-stuff-with-gos-ast-package-pt-2-e4d39ab7e9db
 // https://gist.github.com/imantung/60d0c82b8b1641c0aa1c071e1cf77adf
+// https://stackoverflow.com/questions/69545160/check-if-ast-expr-implements-interface-in-go
 type Validator interface {
 	Valid() bool
 }
@@ -44,6 +45,12 @@ func main() {
 						structType := typeSpec.Type.(*ast.StructType)
 						for _, field := range structType.Fields.List {
 							i := field.Type.(*ast.Ident)
+							j := field.Type.(ast.Expr)
+							_, ok := j.(Validator)
+							if ok {
+								fmt.Println("implements Validator interface")
+							}
+
 							fieldType := i.Name
 							for _, name := range field.Names {
 								fmt.Printf("\tField: name=%s type=%s tag=%s\n", name.Name, fieldType, field.Tag.Value)
