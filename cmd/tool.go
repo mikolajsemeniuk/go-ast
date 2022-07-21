@@ -9,6 +9,10 @@ import (
 	"os"
 )
 
+// https://eli.thegreenplace.net/2021/rewriting-go-source-code-with-ast-tooling/
+// https://medium.com/swlh/cool-stuff-with-gos-ast-package-pt-1-981460cddcd7
+// https://medium.com/swlh/cool-stuff-with-gos-ast-package-pt-2-e4d39ab7e9db
+// https://gist.github.com/imantung/60d0c82b8b1641c0aa1c071e1cf77adf
 type Validator interface {
 	Valid() bool
 }
